@@ -25,6 +25,8 @@ deploy:
   provider: heroku
   api_key:
     secure: FuGulVmPwPatNARKPM9lAptXR3B8xRx/Cp8U9p4ZkOYATf6XkUbSu80Z3bKMmhG3yeHxDo3PNikMwOioRU+gUe6xkZDv2aNgNQgIEtJ+eS7BnDdO9RF5RfHa3nFwZ7SRf4/Kt3t/DQe86MAiHEiya8olIddpgTocmruU8TCYEoVMcbNrnDpABO+bjC7xoM0Eu9YbwumPnHn7cG/W83nSxkwHRN7jp11ZrF+lMwlge7JMVH30/QK+2hlDJ3+3IZ1Qk75OajGPLThGI6kWOv8AVe1FaBm8QN2gEgjuyYdOFGoHagIcquer3RxR12250crxHdi3W5fqB3jK1LKMwbblE9hjk1gg7e+sfLsY2XVLnW4nFfln921pZ6EgP1FsWFJrRLiCHm11m5+Abj8q1VVS1fUgupJdPk5pYZ0aSPHMGlhcrDvrs01febuuctYVew/OPMzvDkvRr7yASxgjfIkqtsNgeMUfVnraXvn/HfSUxVRqDsk3DKilkTW0w1safqvPGbLqfBBJxQqZBWKB6yx7jdlhTE5K77twm4Stmu3+58ZZsHdDmNTWV3KqF0/bmu3FM0w74xxOKY6JN7eOalPXCHXsiF6wgfjXtRFIqizAN8KiptD0qsce3Ge/uPCy3SwdxA2yWvpc/omUaDGabqEwgXn/7LwdpFR7XH3BsbddFYI=
-  app: books-api
+  app: books-api-dev
   on:
     repo: deadpyxel/books-api
+    master: books-api-dev
+    develop: books-api-beta
