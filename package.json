@@ -10,8 +10,7 @@
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "coveralls-coverage": "coveralls < lcov.info",
     "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
-    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage",
-    "start": "node -r dotenv/config ./api/index.js"
+    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
   },
   "author": "“Robson <“ghost0092@gmail.com”> (https://deadpyxel.github.io)",
   "license": "CC-BY-NC-SA-4.0",
