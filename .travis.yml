@@ -11,7 +11,7 @@ services:
 env:
   global:
   - NODE_ENV=test
-  - secure: W6efUiAjpuhriIo7YZTdg6wq7OzuXh9Q9qvb8WzxLcUBRDHGwQ2v7L2dy/Zh6+t8ukaJA1E5yU2LQpq8RWF12NkDTOa4LkzuKr1OP5M2FtSZDyR1tKaYfTyylEiX1/RZBhcYw5NfVPiNa9P4pF2YxeuSgkY4969ROwGoRSoOyzybQFZpXKocH/IWBh41GqigLEuZ+DXTAzoQb72bub7JlZgWFmg6FOv2skuA8Fa7p33O8zipTlclhVrM5wX14hE7NcIm+QAGBswur/sRb3uHxrzmUy22dPvxp5HmEYF5b2PT2RFtxb9sTP7dm1nPub8K9FQtv9VRLTixVr33qq15SwfAbuN18jX29JZTVcsOfVCfeVSQQYxyoaWxkpGE7H3ikA0voAQlzME11ACgZYTKuXZY6vWcSw0qLeWaVeLsCVtOAj+NRv1h+8M1kLm7fqOmGJ0gO3Usjb3JtaxuBwTi+k7kjn5aTXIRh+fTfjXX+e7xYyzvpxZJ7zLH12xvBgv0ncJJoFRbT9o5rDD0r3Sjh+3HQ71+ZFKiM4aYCcj5PF+wwaM5Afv6Jn3gWw4x65H26GyC5gnOIHiAFb4y/Ek21xe5J8HI2j8yr8ecZWLa8QFgd8pBRim4JK5tgg8FTKTR+OWBi9hBdBZ2z+2tbGrHWyfwU72V4tYDCmAsNaM6qvg=
+  - secure: nhqiuLYxjcp5DHALlrvShsdcylTmTVhPwRpj4i76yg5YOTtltOQEz34rQwCi4arGoUexWts7FPug/3kv6fpgH5ZsfN8BiVIVzvsyJ3oirs7UE7qeaP0ks4wYD/NCAWAYVOQVPOs9ApKn81t/c0zRiPfshzTZAEgFFUbCNMv8mOW/rLQttHR7TbqxqP28DJ5+FSov9t8El5fmj13ng7e/Ym1UVnU0Psh5AUtbwex5fqZFztqRa92f7mkfdswuvxpd3bIcWi/i3IkvaGF9UPTGgCer+5QrL2xxoeIMlV+6CaK30wrmnIdkcEBYEMnZRegcOQBC2v1L9K+oNQFQCCRhAIO5XrdEUlD+BvOV8kUOoV/JGfhV8TMcxLdw3ptKIcvMWfYbh+tvp5sXBlejBvT4lbY9I/GIAXOgrjq8lV9n+IymFUcmyQUisrsEqSnlLb/cA2EmQwEl6oaONyIDeUOHuV/j9uuFsj3P20ZfCvdwKzOfQsaXdXR7acxjoiOaT2sI5y/SZiAhM+5vYqGYtxBlnS8fjGZTbsmATKmXJZyJlN2XZYjO1Ym/hkWRi9JmYPuMdBTj5DsNKp7u8Q1+3eL0RjBBXgumAIXAJK7c+1lfV1PuDPnHN2qWv900NP8wRfuJ/5FCFS1AUotpKnc7rn5cgmcR6T1MwZxiaCdZdQ2rRDo=
 before_script:
 - psql -c 'create database book_test;' -U postgres
 - npm run build
@@ -22,11 +22,10 @@ script:
 after_success:
 - npm run coverage
 before_deploy:
-  - npm install now --no-save
-  - now rm books-api --token $NOW_TOKEN --yes || true
+- npm install now --no-save
+- now rm books-api --token $NOW_TOKEN --yes || true
 deploy:
 - provider: script
-  # deploys the application to now.sh
   script: now --public --token $NOW_TOKEN
   skip_cleanup: true
   on:
