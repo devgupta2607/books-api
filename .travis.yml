@@ -11,7 +11,7 @@ services:
 env:
   global:
   - NODE_ENV=test
-  - secure: ir2HdUKcGTpie4qWqTDwPRBk15XjGRWq2Nisxgh4DFWhaU/w2qI7A323fmaRW9Y3PFoxiyNiBvwM15lq1nyipi9+J5Oj2s8Qvh6Z5kkh8DawcXW2dVk0u3z1EX3mwG6WQCWiEOmKMhNgvOnGIJ1yd07lxxO9IwlLTx9sTyW9L9xa4hNRnkl78Mar59uRPF3DOAYfwCZJPNFXqGYLeqUX7Pxhe8gmi2tX7KNhLb33Y+iM+lGKX0q8qaJVlC1MsRJuNKZh9pJXtcitZXl2DGrXqDypFuGMPzJZpXqkZ1UyUtx8+KsNgzhF16O9aiCa5grJ+y2SaPFvuBiaJk2RLUanPWxsLHmk1NPl10dY5xSWmm5FY3D71MJ7yxGr1JIi/G5gnloG4iApUfzS/Zt1N1FMNHT6JZWJMfAW50Zps6w0EIreJYHsfKzRgEQdTi3WtV2v6Bj6r2GGlSkzebRhmN4GSXofc9xXuC3ed/B4zCRHXbOdXMxuub1UyaF8j3I1yvKvPvMfRqjcl0S5SJjq4IqO8wWKDlsr1P3nTE5prDNYXkmx74nGHc0EavHvbX7ITvR/CcI1dBffOMtGkPI8Nh9ClCojsKw6e2ZCmJsPwpVAnDlKm8s89JxddwSVX3WvvsLFiH/8QnrnZzaMTAqpEFjDWgWKd3joLMlnDXeAdptzsow=
+  - secure: DYcb7tIFFF1oAyAsz2oOuY2Dfx6nTASJFilfZydSPFvb0p8MuqGLGtSEBsYoumov5Vvy/nQGURnpofR+cf/5oHYYIS1Ul3Dne4prqsZ/i+hsZ5NDIT1VedaOQ0xYBbDI33V9phoe7pohvUFGrD7x/rw50ntP+DPp8Ow384cKznkzeiFsY4PoWtBMUziX/NUgWJm7hUT853snj+OLsrMIQGqjHFIcGhrbaevrmV4lE9XkQFjxfgOBtzOaY5EGDoSbRKcB3jp15q+7THOyVqSGUIxjmG6QGyhB59u0TYDIoOhL5GsanfGUHXO+uErypWbGRLs74r+lORpRHSX3f8HfrJtRYUAJJOm0UjsBMuzbXmmUZHWSiW805cgOy9cg1P1L3s7dUUGuNtyXcgUIa2hr41iXI369c+Gyhw41F8qvoJaeZgGB7ezvd5E5DnqDVra2HbtKRyBOJo1bHZdh95yyN8L1lzWlKOuxRzetVWUf/IQho6ibnA0r4dVRziRja67um3iFWCatR4tr9UYC2xXPo7bA+giQuMutZvIR8P0uuyGEaA5rdKw+kCKeAqxMhJeaivBPVVryEuxeots2SqMW+rkBhWrPT+NLFaDdcDSphhQyKt/jsmDxapB5a6NTowI9VqwncKZpAL91+tNYvsUOfGOYXmpX+RYuNSdpoQ5Ta6g=
 before_script:
 - psql -c 'create database book_test;' -U postgres
 - npm run build
@@ -21,12 +21,13 @@ script:
 - npm test
 after_success:
 - npm run coverage
+before_deploy:
+- npm install now --no-save
+- now rm node-cd --token $NOW_TOKEN --yes || true
 deploy:
-  provider: heroku
-  api_key:
-    secure: FuGulVmPwPatNARKPM9lAptXR3B8xRx/Cp8U9p4ZkOYATf6XkUbSu80Z3bKMmhG3yeHxDo3PNikMwOioRU+gUe6xkZDv2aNgNQgIEtJ+eS7BnDdO9RF5RfHa3nFwZ7SRf4/Kt3t/DQe86MAiHEiya8olIddpgTocmruU8TCYEoVMcbNrnDpABO+bjC7xoM0Eu9YbwumPnHn7cG/W83nSxkwHRN7jp11ZrF+lMwlge7JMVH30/QK+2hlDJ3+3IZ1Qk75OajGPLThGI6kWOv8AVe1FaBm8QN2gEgjuyYdOFGoHagIcquer3RxR12250crxHdi3W5fqB3jK1LKMwbblE9hjk1gg7e+sfLsY2XVLnW4nFfln921pZ6EgP1FsWFJrRLiCHm11m5+Abj8q1VVS1fUgupJdPk5pYZ0aSPHMGlhcrDvrs01febuuctYVew/OPMzvDkvRr7yASxgjfIkqtsNgeMUfVnraXvn/HfSUxVRqDsk3DKilkTW0w1safqvPGbLqfBBJxQqZBWKB6yx7jdlhTE5K77twm4Stmu3+58ZZsHdDmNTWV3KqF0/bmu3FM0w74xxOKY6JN7eOalPXCHXsiF6wgfjXtRFIqizAN8KiptD0qsce3Ge/uPCy3SwdxA2yWvpc/omUaDGabqEwgXn/7LwdpFR7XH3BsbddFYI=
-  app: books-api-dev
+- provider: script
+  script: now --public --token $NOW_TOKEN
+  skip_cleanup: true
   on:
-    repo: deadpyxel/books-api
-    master: books-api-dev
-    develop: books-api-beta
+    master: true
+    develop: true
