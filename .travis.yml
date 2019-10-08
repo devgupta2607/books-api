@@ -1,23 +1,23 @@
 language: node_js
 node_js:
-  - lts/*
+- lts/*
 cache:
   directories:
-    - "node_modules"
+  - node_modules
 install:
-  - npm install
+- npm install
 services:
-  - postgresql
+- postgresql
 env:
   global:
   - NODE_ENV=test
+  - secure: W6efUiAjpuhriIo7YZTdg6wq7OzuXh9Q9qvb8WzxLcUBRDHGwQ2v7L2dy/Zh6+t8ukaJA1E5yU2LQpq8RWF12NkDTOa4LkzuKr1OP5M2FtSZDyR1tKaYfTyylEiX1/RZBhcYw5NfVPiNa9P4pF2YxeuSgkY4969ROwGoRSoOyzybQFZpXKocH/IWBh41GqigLEuZ+DXTAzoQb72bub7JlZgWFmg6FOv2skuA8Fa7p33O8zipTlclhVrM5wX14hE7NcIm+QAGBswur/sRb3uHxrzmUy22dPvxp5HmEYF5b2PT2RFtxb9sTP7dm1nPub8K9FQtv9VRLTixVr33qq15SwfAbuN18jX29JZTVcsOfVCfeVSQQYxyoaWxkpGE7H3ikA0voAQlzME11ACgZYTKuXZY6vWcSw0qLeWaVeLsCVtOAj+NRv1h+8M1kLm7fqOmGJ0gO3Usjb3JtaxuBwTi+k7kjn5aTXIRh+fTfjXX+e7xYyzvpxZJ7zLH12xvBgv0ncJJoFRbT9o5rDD0r3Sjh+3HQ71+ZFKiM4aYCcj5PF+wwaM5Afv6Jn3gWw4x65H26GyC5gnOIHiAFb4y/Ek21xe5J8HI2j8yr8ecZWLa8QFgd8pBRim4JK5tgg8FTKTR+OWBi9hBdBZ2z+2tbGrHWyfwU72V4tYDCmAsNaM6qvg=
 before_script:
-  - psql -c 'create database book_test;' -U postgres
-  #- psql -c "CREATE USER testuser WITH PASSWORD null;" -U postgres
-  - npm run build
-  - npm install -g sequelize-cli
-  - sequelize db:migrate
+- psql -c 'create database book_test;' -U postgres
+- npm run build
+- npm install -g sequelize-cli
+- sequelize db:migrate
 script:
-  - npm test
+- npm test
 after_success:
-  - npm run coverage
+- npm run coverage
